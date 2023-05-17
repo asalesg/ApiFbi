@@ -1,4 +1,13 @@
 # For more info on HTTP files go to https://aka.ms/vs/httpfile
 
 
-GET 
+# loucura esse esquema  get no fbi
+GET https://localhost:7031/api/fbis
+
+###
+
+# loucura esse esquema  get no interpol
+GET https://localhost:7031/api/interpols
+#para separar as requisições precisa de 3#
+## uma forma de usar isso é clicar com a direita na linha da request
+## e selecionar "enviar solicitação"
