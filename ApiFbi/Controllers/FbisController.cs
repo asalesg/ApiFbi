@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ApiFbi.Data;
 using ApiFbi.Models;
@@ -34,7 +29,7 @@ namespace ApiFbi.Controllers
 
         // GET: api/Fbis/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Fbi>> GetFbi(string id)
+        public async Task<ActionResult<Fbi>> GetFbi(int id)
         {
           if (_context.Fbi == null)
           {
@@ -53,9 +48,9 @@ namespace ApiFbi.Controllers
         // PUT: api/Fbis/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutFbi(string id, Fbi fbi)
+        public async Task<IActionResult> PutFbi(int id, Fbi fbi)
         {
-            if (id != fbi.Title)
+            if (id != fbi.Id)
             {
                 return BadRequest();
             }
@@ -91,28 +86,14 @@ namespace ApiFbi.Controllers
               return Problem("Entity set 'ApiFbiContext.Fbi'  is null.");
           }
             _context.Fbi.Add(fbi);
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateException)
-            {
-                if (FbiExists(fbi.Title))
-                {
-                    return Conflict();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+            await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetFbi", new { id = fbi.Title }, fbi);
+            return CreatedAtAction("GetFbi", new { id = fbi.Id }, fbi);
         }
 
         // DELETE: api/Fbis/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteFbi(string id)
+        public async Task<IActionResult> DeleteFbi(int id)
         {
             if (_context.Fbi == null)
             {
@@ -130,9 +111,9 @@ namespace ApiFbi.Controllers
             return NoContent();
         }
 
-        private bool FbiExists(string id)
+        private bool FbiExists(int id)
         {
-            return (_context.Fbi?.Any(e => e.Title == id)).GetValueOrDefault();
+            return (_context.Fbi?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

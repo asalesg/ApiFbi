@@ -1,6 +1,5 @@
 ﻿using ApiFbi.Models;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.VisualStudio.Web.CodeGeneration.EntityFrameworkCore;
 
 namespace ApiFbi.Data
 {
@@ -13,6 +12,6 @@ namespace ApiFbi.Data
 
         public DbSet<Fbi> Fbi { get; set; }
 
-        public DbSet<ApiFbi.Models.Interpol> Interpol { get; set; } = default!;
+        public DbSet<Interpol> Interpol { get; set; } = default!;
     }
 }

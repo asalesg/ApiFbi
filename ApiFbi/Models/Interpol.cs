@@ -12,6 +12,8 @@ namespace ApiFbi.Models
 
         public string? Nationalities { get; set; }
 
+        public ICollection<Fbi> fbis { get; set; } = new List<Fbi>();
+
 
         public Interpol()
         {
